@@ -19,9 +19,11 @@ inside the <p> element with id="t1-msg".
 💡 Hint:
 document.getElementById("t1-msg").innerHTML = "Hello, World!";
 */
- 
-
+window.addEventListener('DOMContentLoaded', () => {
+ document.getElementById('t1-msg').innerHTML = "Hello, World!"
+})
 /*  
+
 =======================================
 TODO2: Interaction Corner
 ---------------------------------------
@@ -40,7 +42,6 @@ button.addEventListener("click", function () {
     // change text here
 });
 */
- 
 
 /*  
 =======================================
