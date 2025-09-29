@@ -19,9 +19,11 @@ inside the <p> element with id="t1-msg".
 💡 Hint:
 document.getElementById("t1-msg").innerHTML = "Hello, World!";
 */
- 
-
+window.addEventListener('DOMContentLoaded', () => {
+ document.getElementById('t1-msg').innerHTML = "Hello, World!"
+})
 /*  
+
 =======================================
 TODO2: Interaction Corner
 ---------------------------------------
@@ -40,8 +42,11 @@ button.addEventListener("click", function () {
     // change text here
 });
 */
- 
-
+const btn = document.getElementById("t2-btn");
+btn.addEventListener("click", function()  {
+    const status = document.getElementById("t2-status");
+    status.innerHTML = "You clicked the button!";
+});
 /*  
 =======================================
 TODO3: Inspiring Quote Board
@@ -69,7 +74,22 @@ data.content   // the quote text
 data.author    // the author
 */
  
+const quoteBtn = document.getElementById("t3-loadQuote")
+quoteBtn.addEventListener('click', () => {
+     fetch("https://dummyjson.com/quotes/random")
+    .then(response => response.json())
+    .then(data => {
 
+      const quoteText = document.getElementById("t3-quote");
+      quoteText.textContent = data.quote || data.content; 
+
+      const authorText = document.getElementById("t3-author");
+      authorText.textContent = `— ${data.author}`;
+    })
+    .catch(error => {
+      console.error("Error fetching quote:", error);
+    });
+})
 /*  
 =======================================
 TODO4: Dammam Weather Now
@@ -94,3 +114,23 @@ data.main.temp      → temperature (°C)
 data.main.humidity  → humidity (%)
 data.wind.speed     → wind speed (m/s)
 */
+const weather = document.getElementById("t4-loadWx");
+weather.addEventListener('click', () => {
+    const url = "https://api.openweathermap.org/data/2.5/weather?q=Dammam&appid=5277e7bc6fdf139d5bbb14ce74e18c4e&units=metric"
+    fetch(url)
+    .then (response => {
+        if (!response.ok) {
+            throw new Error(`API error: ${response.status}`)
+        }
+        return response.json();
+    })
+     .then(data => {
+      document.getElementById("t4-temp").textContent = `${data.main.temp} °C`;
+      document.getElementById("t4-hum").textContent = `${data.main.humidity} %`;
+      document.getElementById("t4-wind").textContent = `${data.wind.speed} m/s`;
+    })
+    .catch(error => {
+      console.error("Error fetching weather data:", error);
+    });;
+    
+})
