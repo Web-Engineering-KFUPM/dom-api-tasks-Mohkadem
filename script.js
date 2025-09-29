@@ -42,7 +42,11 @@ button.addEventListener("click", function () {
     // change text here
 });
 */
-
+const btn = document.getElementById("t2-btn");
+btn.addEventListener("click", function()  {
+    const status = document.getElementById("t2-status");
+    status.innerHTML = "You clicked the button!";
+});
 /*  
 =======================================
 TODO3: Inspiring Quote Board
